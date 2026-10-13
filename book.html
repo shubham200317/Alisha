@@ -4,306 +4,1138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffd6e5">
-  <title>Just You, Me & Forever ❤️</title>
-  <link rel="stylesheet" href="Style.css">
+  <meta name="theme-color" content="#591b36">
+  <title>Our Little Forever 💗</title>
+
+  <style>
+    :root {
+      --wine: #591b36;
+      --rose: #c64f7d;
+      --pink: #f4c6d8;
+      --paper: #fffaf6;
+      --ink: #65394c;
+      --gold: #d9b77b;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      min-height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 24px 16px 30px;
+      overflow-x: hidden;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(ellipse at 50% 0%, #873b5a 0%, transparent 48%),
+        linear-gradient(145deg, #301222, #5d203c 48%, #321426);
+    }
+
+    button { font: inherit; }
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-heart {
+      position: absolute;
+      bottom: -40px;
+      opacity: 0;
+      animation: floatHeart var(--duration, 8s) linear forwards;
+    }
+
+    .site {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1050px);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      color: #ffe7f0;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .brand-heart {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border: 1px solid #f6c7d78a;
+      border-radius: 50%;
+      background: #ffffff12;
+      font-size: 18px;
+    }
+
+    .top-label {
+      color: #f3c3d4;
+      text-align: right;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+    }
+
+    .intro {
+      text-align: center;
+      margin: 0 auto 25px;
+      max-width: 620px;
+      color: #fff0f5;
+    }
+
+    .intro .eyebrow {
+      color: #e9b8cb;
+      font: 10px Arial, sans-serif;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .intro h1 {
+      margin: 10px 0;
+      font-size: clamp(27px, 5vw, 45px);
+      font-weight: normal;
+      line-height: 1.2;
+      text-shadow: 0 3px 18px #ed8eb550;
+    }
+
+    .intro p {
+      margin: 0;
+      color: #f1d4df;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* The book itself */
+
+    .book-shell {
+      position: relative;
+      width: min(100%, 900px);
+      margin: 0 auto;
+      padding: 13px;
+      border: 1px solid #d8b37c66;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #8a4c61, #55243a 55%, #371a2b);
+      box-shadow:
+        0 28px 65px #17071385,
+        inset 0 0 0 3px #ffffff09,
+        inset 0 0 0 5px #d7b47820;
+    }
+
+    .book-shell::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px solid #f3d8a33b;
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    .book {
+      position: relative;
+      min-height: 520px;
+      overflow: hidden;
+      border-radius: 7px;
+      background: var(--paper);
+      box-shadow: inset 0 0 22px #6e3b4b12;
+    }
+
+    .page {
+      display: none;
+      min-height: 520px;
+      padding: clamp(24px, 5vw, 52px);
+      animation: pageEnter .55s cubic-bezier(.2,.7,.2,1) both;
+      background:
+        radial-gradient(ellipse at 100% 0%, #f8e7ec70, transparent 36%),
+        linear-gradient(110deg, #fffdf9, #fff8f5 72%, #fdf0f2);
+    }
+
+    .page.active { display: block; }
+
+    .page.exit-next {
+      animation: pageExitNext .24s ease both;
+    }
+
+    .page.exit-prev {
+      animation: pageExitPrev .24s ease both;
+    }
+
+    .page-inner {
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .page-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 12px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #e9d4dc;
+      color: #b2768d;
+      font: 9px Arial, sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .ornament {
+      color: #cb7d9a;
+      letter-spacing: 4px;
+    }
+
+    .page h2 {
+      margin: 0 0 17px;
+      color: #8c3158;
+      font-size: clamp(25px, 4vw, 37px);
+      font-weight: normal;
+      line-height: 1.25;
+    }
+
+    .page h3 {
+      margin: 22px 0 10px;
+      color: #9b4567;
+      font-size: 19px;
+      font-weight: normal;
+    }
+
+    .page p {
+      color: #70495a;
+      font-size: 15px;
+      line-height: 1.95;
+      overflow-wrap: anywhere;
+    }
+
+    .lead {
+      color: #a34a70 !important;
+      font-size: 17px !important;
+      font-style: italic;
+    }
+
+    .center { text-align: center; }
+
+    .big-heart {
+      margin: 10px 0 17px;
+      font-size: 52px;
+      animation: heartbeat 2s ease-in-out infinite;
+      filter: drop-shadow(0 5px 9px #dc719b45);
+    }
+
+    .cover-kicker {
+      color: #ba7892;
+      font: 10px Arial, sans-serif;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .cover-title {
+      color: #91375e !important;
+      font-size: clamp(34px, 7vw, 59px) !important;
+      line-height: 1.12 !important;
+    }
+
+    .cover-quote {
+      max-width: 430px;
+      margin: 15px auto 24px;
+      font-size: 17px !important;
+      font-style: italic;
+    }
+
+    .signature {
+      margin-top: 23px;
+      color: #b64d79 !important;
+      font-size: 17px !important;
+      font-style: italic;
+    }
+
+    .gold-line {
+      width: 85px;
+      height: 1px;
+      margin: 22px auto;
+      background: linear-gradient(90deg, transparent, #c7a15f, transparent);
+    }
+
+    /* Photo frames */
+
+    .memory-photo {
+      position: relative;
+      max-width: 420px;
+      margin: 24px auto;
+      padding: 9px 9px 30px;
+      background: #fff;
+      border: 1px solid #ead8dc;
+      box-shadow: 0 12px 27px #6f31401c;
+      transform: rotate(-1deg);
+    }
+
+    .memory-photo.alternate { transform: rotate(1deg); }
+
+    .memory-photo img {
+      display: block;
+      width: 100%;
+      height: clamp(200px, 45vw, 370px);
+      object-fit: contain;
+      border-radius: 2px;
+      background: #f8edf0;
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 7px;
+      left: 0;
+      width: 100%;
+      color: #a24d70;
+      text-align: center;
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    .caption {
+      color: #a96a83 !important;
+      text-align: center;
+      font-size: 12px !important;
+      font-style: italic;
+    }
+
+    /* Promise and memory boxes */
+
+    .love-card {
+      margin: 17px 0;
+      padding: 18px 19px;
+      border: 1px solid #efd6df;
+      border-left: 3px solid #c96b91;
+      border-radius: 5px 12px 12px 5px;
+      background: linear-gradient(110deg, #fbeaf0, #fff9f7);
+    }
+
+    .love-card p { margin: 0; }
+
+    .love-card .card-title {
+      margin-bottom: 5px;
+      color: #a04066;
+      font-size: 16px;
+    }
+
+    .love-card p:last-child {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .promise-list {
+      display: grid;
+      gap: 12px;
+      margin: 23px 0;
+    }
+
+    .promise {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 15px;
+      border: 1px solid #f0dbe2;
+      border-radius: 10px;
+      background: #fffdfb;
+    }
+
+    .promise-icon {
+      flex-shrink: 0;
+      font-size: 20px;
+    }
+
+    .promise p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    /* Video */
+
+    .video-frame {
+      margin: 22px 0;
+      padding: 9px;
+      border: 1px solid #e4c6d2;
+      border-radius: 12px;
+      background: #f8e7ed;
+      box-shadow: 0 12px 24px #87304b15;
+    }
+
+    .video-frame video {
+      display: block;
+      width: 100%;
+      max-height: 440px;
+      border-radius: 7px;
+      background: #2d1522;
+    }
+
+    .video-note {
+      margin: 10px 0 0;
+      text-align: center;
+      color: #9e5a76 !important;
+      font-size: 12px !important;
+      font-style: italic;
+    }
+
+    /* Navigation */
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+      width: min(100%, 900px);
+      margin: 19px auto 0;
+    }
+
+    .nav-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid #f2cfdd;
+      border-radius: 28px;
+      background: #fff7fa;
+      color: #8d3157;
+      font: 600 12px Arial, sans-serif;
+      cursor: pointer;
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .nav-button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      background: white;
+      box-shadow: 0 7px 18px #14081225;
+    }
+
+    .nav-button:active:not(:disabled) {
+      transform: scale(.97);
+    }
+
+    .nav-button:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    .next-button {
+      justify-self: end;
+      border-color: #eebbd0;
+      background: linear-gradient(135deg, #fff7fa, #f8dce7);
+    }
+
+    .page-indicator {
+      min-width: 90px;
+      text-align: center;
+      color: #ffe5ef;
+      font: 11px Arial, sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .progress-track {
+      width: min(100%, 280px);
+      height: 3px;
+      margin: 15px auto 0;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #ffffff30;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #e9b87a, #ffdfe9);
+      transition: width .45s ease;
+    }
+
+    .bottom-note {
+      margin: 25px 0 0;
+      color: #f3d4e0;
+      text-align: center;
+      font: 11px/1.8 Arial, sans-serif;
+      letter-spacing: .6px;
+    }
+
+    .bottom-note span { color: #ffc2d8; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @keyframes pageEnter {
+      from {
+        opacity: 0;
+        transform: perspective(900px) rotateY(-5deg) translateX(10px);
+      }
+      to {
+        opacity: 1;
+        transform: perspective(900px) rotateY(0) translateX(0);
+      }
+    }
+
+    @keyframes pageExitNext {
+      to {
+        opacity: 0;
+        transform: perspective(900px) rotateY(5deg) translateX(-10px);
+      }
+    }
+
+    @keyframes pageExitPrev {
+      to {
+        opacity: 0;
+        transform: perspective(900px) rotateY(-5deg) translateX(10px);
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.1); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.06); }
+    }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(0) rotate(0); opacity: 0; }
+      15% { opacity: .7; }
+      100% { transform: translateY(-110vh) rotate(40deg); opacity: 0; }
+    }
+
+    @media (min-width: 760px) {
+      body { padding: 34px 25px; }
+
+      .book-shell { padding: 18px; }
+
+      .book {
+        min-height: 590px;
+      }
+
+      .page {
+        min-height: 590px;
+        padding: 50px 70px;
+      }
+
+      .page-inner { max-width: 620px; }
+
+      .memory-photo {
+        max-width: 400px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      body { padding: 18px 10px 25px; }
+
+      .topbar { margin-bottom: 17px; }
+
+      .top-label { font-size: 9px; }
+
+      .intro { margin-bottom: 20px; }
+
+      .intro p { font-size: 12px; }
+
+      .book-shell { padding: 7px; }
+
+      .book { min-height: 0; }
+
+      .page {
+        min-height: 510px;
+        padding: 23px 18px;
+      }
+
+      .page-topline {
+        margin-bottom: 21px;
+        font-size: 8px;
+        letter-spacing: 1.3px;
+      }
+
+      .page p {
+        font-size: 14px;
+        line-height: 1.85;
+      }
+
+      .lead { font-size: 15px !important; }
+
+      .memory-photo {
+        margin: 20px auto;
+        padding: 7px 7px 27px;
+      }
+
+      .memory-photo img {
+        height: clamp(180px, 65vw, 330px);
+      }
+
+      .controls { gap: 7px; }
+
+      .nav-button {
+        min-height: 43px;
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+
+      .page-indicator {
+        min-width: 65px;
+        font-size: 10px;
+      }
+
+      .promise { padding: 12px; }
+    }
+
+    @media (max-width: 360px) {
+      .page { padding: 19px 14px; }
+      .nav-button { padding: 9px 10px; gap: 4px; }
+      .brand { font-size: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <main class="love-book">
+  <div class="ambient" id="ambient" aria-hidden="true"></div>
 
-    <!-- COVER -->
-    <section class="cover card">
-      <img class="cover-photo" src="11.jpeg" alt="A beautiful memory of Alishaaa">
+  <main class="site">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-heart">♡</span>
+        <span>OUR LITTLE FOREVER</span>
+      </div>
+      <div class="top-label">MADE WITH LOVE · JUST FOR YOU</div>
+    </header>
 
-      <div class="cover-overlay"></div>
+    <section class="intro">
+      <div class="eyebrow">A book full of us</div>
+      <h1>Just You, Me & Forever 💗</h1>
+      <p>For my Alishaaa, meri Aaaluuu, meri baykooo. 🥹</p>
+    </section>
 
-      <div class="cover-content">
-        <span class="eyebrow">A little something from my heart 💌</span>
-        <h1>For My Alishaaa <span>❤️</span></h1>
-        <p class="cover-subtitle">Just you, me, and a little forever ♾️</p>
-        <p class="cover-name">My Aaaluuu 🧿</p>
-        <p class="cover-signature">From your Shubhu, with all his heart. 💗</p>
-        <a class="primary-button" href="#our-video">Open your surprise 💋</a>
+    <section class="book-shell" aria-label="Interactive love book">
+      <div class="book" id="book">
+
+        <!-- PAGE 1: COVER -->
+        <article class="page active center">
+          <div class="page-inner">
+            <div class="cover-kicker">A story written by my heart</div>
+            <div class="big-heart">💗</div>
+            <h2 class="cover-title">For My<br>Alishaaa</h2>
+            <div class="gold-line"></div>
+            <p class="cover-quote">
+              “Some people become your favourite hello,
+              your safest place, and your sweetest forever.”
+            </p>
+            <p class="lead">Tu ahes na, mhanun sagla special aahe. ❤️</p>
+            <div class="gold-line"></div>
+            <p class="signature">Always yours, Shubhu ♾️</p>
+            <p class="caption">Turn the pages slowly, baccha… 💌</p>
+          </div>
+        </article>
+
+        <!-- PAGE 2: INTRODUCTION -->
+        <article class="page">
+          <div class="page-inner">
+            <div class="page-topline">
+              <span>A little note for you</span>
+              <span class="ornament">♡ 01</span>
+            </div>
+            <h2>Hiii, Meri Pyaari Baccha 🥹💋</h2>
+            <p class="lead">Meri Aaaluuu, this little book is only for you. 💗</p>
+            <p>
+              Pata hai, kabhi kabhi mere paas tumhe batane ke liye
+              itni saari feelings hoti hain ki words hi nahi milte.
+              Tum mere liye sirf ek person nahi ho, tum meri daily
+              smile, mera sukoon aur mere din ka sabse pyaara part ho.
+            </p>
+            <p>
+              Tumhara ek chhota sa message bhi mera mood change kar
+              sakta hai. Tumhari voice sunke jo happiness milti hai,
+              woh main properly explain bhi nahi kar sakta.
+            </p>
+            <p>
+              Isliye socha, apne dil ki kuch baatein ek book mein
+              rakh doon—taaki jab bhi tumhe meri yaad aaye, tum ise
+              open karke feel kar sako ki tum kitni special ho.
+            </p>
+            <div class="love-card">
+              <p class="card-title">Ek baat yaad rakhna, baccha 💌</p>
+              <p>Is book ka har page tumhare liye hai, aur har word ke peeche mera pyaar hai.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- PAGE 3: OUR STORY -->
+        <article class="page">
+          <div class="page-inner">
+            <div class="page-topline">
+              <span>Chapter one</span>
+              <span class="ornament">♡ 02</span>
+            </div>
+            <h2>How You Became My Everything 💞</h2>
+            <p>
+              Kab tum meri life ka itna important part ban gayi,
+              mujhe sach mein pata hi nahi chala. Ek simple si
+              conversation se shuru hui baat, aaj mere dil ki
+              sabse beautiful story ban gayi hai.
+            </p>
+            <p>
+              Tumse baat karna, tumhari silly baatein sunna,
+              tumhe tease karna aur phir tumhe manana—yeh sab
+              meri favourite memories ban gayi hain.
+            </p>
+
+            <figure class="memory-photo">
+              <img src="11.jpeg" alt="A special memory of us"
+                   loading="lazy">
+              <figcaption class="photo-caption">
+                One little memory, a thousand feelings ♡
+              </figcaption>
+            </figure>
+
+            <p>
+              Main future predict nahi kar sakta, but itna zaroor
+              jaanta hoon ki aaj tum mere liye bahut special ho.
+              Main chahta hoon hum apni story ko pyaar, trust aur
+              understanding ke saath aage likhein.
+            </p>
+          </div>
+        </article>
+
+        <!-- PAGE 4: HER LITTLE THINGS -->
+        <article class="page">
+          <div class="page-inner">
+            <div class="page-topline">
+              <span>My favourite details</span>
+              <span class="ornament">♡ 03</span>
+            </div>
+            <h2>Your Little Things Are My Favourite 🫶🏻</h2>
+            <p>
+              Tumhara “Hello ahooo”, tumhara “Kay kartay?”,
+              aur phir achanak se mujhe yaad karke message karna—
+              yeh chhoti chhoti cheezein mere liye bahut precious hain.
+            </p>
+
+            <div class="love-card">
+              <p class="card-title">Your caring side 🥹</p>
+              <p>Jab tum poochti ho ki maine khana khaya ya nahi, mera din kaisa tha, ya main theek hoon ya nahi—mujhe genuinely loved feel hota hai.</p>
+            </div>
+
+            <div class="love-card">
+              <p class="card-title">Your cute side 💗</p>
+              <p>Tumhari masti, tumhara pyaar, tumhari cute si baatein aur tumhara mujhe special feel karwana—sab kuch mere dil ke bahut close hai.</p>
+            </div>
+
+            <figure class="memory-photo alternate">
+              <img src="22.jpeg" alt="A favourite photo memory"
+                   loading="lazy">
+              <figcaption class="photo-caption">
+                Your smile deserves its own chapter 💕
+              </figcaption>
+            </figure>
+
+            <p class="center lead">
+              Tumhari little things hi meri big happiness hain, Aaaluuu. 💋
+            </p>
+          </div>
+        </article>
+
+        <!-- PAGE 5: VIDEO MEMORY -->
+        <article class="page">
+          <div class="page-inner">
+            <div class="page-topline">
+              <span>A memory to replay</span>
+              <span class="ornament">♡ 04</span>
+            </div>
+            <h2>A Little Moment, A Lot of Love 🎬</h2>
+            <p>
+              Kuch memories aisi hoti hain jinhe dekhkar automatically
+              smile aa jaati hai. Main chahta hoon ki hum aise hi
+              beautiful moments banate rahein—simple, genuine aur apne.
+            </p>
+
+            <div class="video-frame">
+              <video controls playsinline preload="metadata"
+                     poster="33.jpeg">
+                <source src="video.mp4" type="video/mp4">
+                Your browser does not support this video.
+              </video>
+              <p class="video-note">
+                Press play, baccha. This memory is for you. 💗
+              </p>
+            </div>
+
+            <figure class="memory-photo">
+              <img src="33.jpeg" alt="A memory close to my heart"
+                   loading="lazy">
+              <figcaption class="photo-caption">
+                Little moments become forever memories ♾️
+              </figcaption>
+            </figure>
+
+            <p class="center">
+              More memories to make, more laughs to share,
+              more reasons to choose each other. 💞
+            </p>
+          </div>
+        </article>
+
+        <!-- PAGE 6: MY PROMISE -->
+        <article class="page">
+          <div class="page-inner">
+            <div class="page-topline">
+              <span>A promise from my heart</span>
+              <span class="ornament">♡ 05</span>
+            </div>
+            <h2>My Heart Makes One Promise 🤍</h2>
+            <p>
+              Main perfect nahi hoon, baccha. Kabhi overthink karunga,
+              kabhi apni feelings properly express nahi kar paunga.
+              Lekin main chahta hoon ki hum dono ek doosre ko samajhna
+              aur saath mein grow karna seekhein.
+            </p>
+
+            <div class="promise-list">
+              <div class="promise">
+                <span class="promise-icon">🤍</span>
+                <p><strong>Trust:</strong> Main chahta hoon hum apne relationship mein honesty aur trust ko hamesha importance dein.</p>
+              </div>
+              <div class="promise">
+                <span class="promise-icon">🫶🏻</span>
+                <p><strong>Respect:</strong> Tumhari feelings, tumhari choices aur tumhari individuality mere liye matter karti hain.</p>
+              </div>
+              <div class="promise">
+                <span class="promise-icon">💌</span>
+                <p><strong>Communication:</strong> Kuch bhi bother kare toh silence ya assumptions ke bajaye hum pyaar se baat karein.</p>
+              </div>
+              <div class="promise">
+                <span class="promise-icon">🌷</span>
+                <p><strong>Effort:</strong> Main sirf words se nahi, apne actions se bhi tumhe care aur respect feel karwana chahta hoon.</p>
+              </div>
+            </div>
+
+            <p class="center lead">
+              Perfect love nahi, baccha—real love, with patience and effort. ❤️
+            </p>
+          </div>
+        </article>
+
+        <!-- PAGE 7: OUR FUTURE -->
+        <article class="page">
+          <div class="page-inner">
+            <div class="page-topline">
+              <span>The future I imagine</span>
+              <span class="ornament">♡ 06</span>
+            </div>
+            <h2>The Life I Dream Of With You ♾️</h2>
+            <p>
+              Jab main future ke baare mein sochta hoon, mujhe sirf
+              grand plans nahi, balki chhoti chhoti khushiyan bhi
+              imagine hoti hain.
+            </p>
+            <p>
+              Ek din saath ghoomna, random photos lena, favourite
+              food share karna, busy day ke baad ek doosre se baat
+              karna aur bina kisi special reason ke hasna.
+            </p>
+
+            <figure class="memory-photo alternate">
+              <img src="44.jpeg" alt="A beautiful memory for our future"
+                   loading="lazy">
+              <figcaption class="photo-caption">
+                One day, one memory at a time 💗
+              </figcaption>
+            </figure>
+
+            <p>
+              Main chahta hoon hum ek aisa bond banayein jahan dono
+              apne dreams pursue kar sakein, ek doosre ko support
+              karein aur difficult days mein bhi respect ke saath
+              ek doosre ka haath thaamein.
+            </p>
+
+            <div class="love-card">
+              <p class="card-title">Our little dream 🌷</p>
+              <p>A peaceful life, silly jokes, honest conversations, shared dreams, aur bahut saari memories—apne pace par, together.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- PAGE 8: WHAT I WANT HER TO KNOW -->
+        <article class="page">
+          <div class="page-inner">
+            <div class="page-topline">
+              <span>Things I want you to know</span>
+              <span class="ornament">♡ 07</span>
+            </div>
+            <h2>Things I May Not Say Every Day 🥹</h2>
+            <p>
+              Aaaluuu, tumhe hamesha strong rehne ki zaroorat nahi.
+              Tum apni feelings share kar sakti ho, apne bad days
+              bata sakti ho, aur jab tumhe support chahiye ho,
+              toh mujhse baat kar sakti ho.
+            </p>
+            <p>
+              Main chahta hoon tum mere saath comfortable feel karo—
+              bina pretend kiye, bina apni feelings hide kiye.
+              Tumhari happiness important hai, aur tumhari worries
+              ko bhi main patiently sunna chahta hoon.
+            </p>
+
+            <figure class="memory-photo">
+              <img src="55.jpeg" alt="A special picture for Alishaaa"
+                   loading="lazy">
+              <figcaption class="photo-caption">
+                You will always have a special place in my heart ♡
+              </figcaption>
+            </figure>
+
+            <p class="lead center">
+              Thank you for being you, meri jaan. 💋
+            </p>
+          </div>
+        </article>
+
+        <!-- PAGE 9: FINAL LOVE LETTER -->
+        <article class="page center">
+          <div class="page-inner">
+            <div class="page-topline">
+              <span>One last thing, my love</span>
+              <span class="ornament">♡ 08</span>
+            </div>
+
+            <div class="big-heart">❤️</div>
+            <h2 class="cover-title">I Love You,<br>Meri Baykooo</h2>
+            <div class="gold-line"></div>
+
+            <p>
+              Thank you meri life mein aane ke liye, meri baaton ko
+              sunne ke liye, mujhe smile karwane ke liye aur apni
+              beautiful presence se mere days ko special banane ke liye.
+            </p>
+
+            <p>
+              Main chahta hoon hum har day ek doosre ko thoda aur
+              samjhein, pyaar se communicate karein aur apni story
+              ko beautiful memories se fill karein.
+            </p>
+
+            <p class="lead">
+              Tu meri favourite person hai, Aaaluuu. Aaj bhi,
+              aur har us din jab hum apni story ko aage likhenge. 🥹💗
+            </p>
+
+            <div class="gold-line"></div>
+
+            <p class="signature">
+              Always yours,<br>Shubhu 🫶🏻♾️
+            </p>
+
+            <div class="big-heart">💗</div>
+            <p class="caption">
+              Just you, me, and a little forever. 💌
+            </p>
+
+            <button class="nav-button" id="replayButton" type="button">
+              ↻ Read Our Story Again
+            </button>
+          </div>
+        </article>
+
       </div>
     </section>
 
-    <!-- VIDEO: FIRST SECTION AFTER THE COVER -->
-    <section class="section-card video-section card" id="our-video">
-      <div class="section-heading">
-        <span class="section-icon">🎥</span>
-        <p class="eyebrow">A memory I want to keep forever</p>
-        <h2>Our Little Memory ❤️</h2>
-        <p class="section-intro">
-          Har memory tumhare saath mere liye special hai, meri Aaaluuu.
-          Kuch moments sirf yaadein nahi hote, woh dil mein hamesha ke liye reh jaate hain. 🫶🏻
-        </p>
+    <nav class="controls" aria-label="Book navigation">
+      <button class="nav-button" id="prevButton" type="button">
+        <span>←</span> Previous
+      </button>
+
+      <div class="page-indicator" id="pageIndicator" aria-live="polite">
+        PAGE 01 / 09
       </div>
 
-      <div class="video-frame">
-        <video controls playsinline preload="metadata" poster="11.jpeg">
-          <source src="video.mp4" type="video/mp4">
-          Your browser does not support video playback.
-        </video>
-      </div>
-      <p class="photo-caption">One video, so many feelings. I love making memories with you. 💞</p>
-    </section>
+      <button class="nav-button next-button" id="nextButton" type="button">
+        Next Page <span>→</span>
+      </button>
+    </nav>
 
-    <!-- INTRODUCTION -->
-    <section class="section-card card">
-      <div class="letter-content">
-        <p class="eyebrow">To the girl who owns my heart 💌</p>
-        <h2>Hiii, Meri Pyaari Baccha 🥹💋</h2>
+    <div class="progress-track" aria-hidden="true">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
 
-        <p>
-          Aaj tumhare liye kuch likhne ka mann kiya, kyunki kabhi kabhi
-          dil mein itna pyaar hota hai ki words bhi kam pad jaate hain.
-        </p>
-        <p>
-          Toh socha apne dil ka ek chhota sa hissa tumhare naam kar doon.
-          ❤️ Tum mere liye kitni special ho, shayad main har baar bol nahi
-          pata, par aaj chahta hoon ki tum isse dil se mehsoos karo.
-        </p>
-        <p>
-          Dheere dheere padhna, Aaaluuu... har page mein tumhara Shubhu
-          chhupa hai, aur har line mein tumhare liye thoda aur pyaar. 🧿🫂
-        </p>
-      </div>
-      <div class="quote-box">“Tum meri favourite feeling ho, jise main kabhi khona nahi chahta.” ❤️</div>
-    </section>
-
-    <!-- CHAPTER 1 -->
-    <section class="section-card card">
-      <div class="letter-content">
-        <p class="eyebrow">Chapter 01 · My favourite person</p>
-        <h2>How You Became My Everything 💞</h2>
-
-        <p>
-          Alishaaa, pata hai? Mujhe nahi pata tha ki koi insaan meri life
-          mein aakar itna important ban jayega. Dheere dheere tum meri
-          aadat nahi, meri favourite feeling ban gayi.
-        </p>
-        <p>
-          Tumse baat karna, tumhari baatein sunna, tumhare saath hasi-mazaak
-          karna, aur bina kisi reason ke tumhe yaad karna... ab ye sab meri
-          life ke sabse pyaare moments hain. 🥹
-        </p>
-        <p>
-          Aaj itna zaroor pata hai ki mera dil tumhare saath ek alag hi
-          sukoon feel karta hai. Tumse baat karke lagta hai, haan, apna
-          koi hai. ❤️
-        </p>
-        <p>
-          Tum sirf meri girlfriend nahi ho, Aaaluuu. Tum woh insaan ho
-          jiske saath main apni poori zindagi imagine karta hoon. 🫀♾️
-        </p>
-      </div>
-
-      <figure class="memory">
-        <img src="22.jpeg" alt="A sweet memory together" loading="lazy">
-        <figcaption>My cutu 🫶🏻</figcaption>
-      </figure>
-    </section>
-
-    <!-- CHAPTER 2 -->
-    <section class="section-card card">
-      <div class="letter-content">
-        <p class="eyebrow">Chapter 02 · The little things</p>
-        <h2>Your Little Things Are My Favourite 🫶🏻</h2>
-
-        <p>
-          Tumhara “Hello ahooo”, tumhara “Kay kartay”, tumhara mujhe
-          baccha bulana, aur tumhara baar baar meri fikar karna...
-          uff, meri jaan, kitna pyaara lagta hai. 🥹💗
-        </p>
-        <p>
-          Jab tum poochti ho ki khana khaya ya nahi, theek ho ya nahi,
-          kya kar rahe ho, kahan ho... toh mujhe sirf sawaal nahi dikhte.
-          Mujhe un sawaalon ke peeche chhupa tumhara pyaar dikhta hai.
-        </p>
-        <p>
-          Tumhari chhoti chhoti baatein mere liye bahut badi hain.
-          Tumhari smile mera mood theek kar sakti hai, tumhari awaaz
-          mere din ko better bana sakti hai, aur tumhara ek pyaara sa
-          message mujhe khush kar sakta hai. 💋
-        </p>
-        <p>
-          Sach kahun toh, mujhe tumhari har version se pyaar hai:
-          cute wali tum, pagal wali tum, gussa karne wali tum,
-          aur woh wali tum jo thodi der baad khud hi mere paas aa jaati hai. 😂❤️
-        </p>
-      </div>
-
-      <figure class="memory memory-small">
-        <img src="33.jpeg" alt="Alishaaa looking beautiful" loading="lazy">
-        <figcaption>Tumhari smile meri favourite hai, meri jaan. 🌷</figcaption>
-      </figure>
-    </section>
-
-    <!-- CHAPTER 3 -->
-    <section class="section-card card">
-      <div class="letter-content">
-        <p class="eyebrow">Chapter 03 · A promise from my heart</p>
-        <h2>My Heart Makes One Promise 🤍</h2>
-
-        <p>
-          Baccha, main maanta hoon ki kabhi kabhi main overthink kar leta
-          hoon. Tum mere liye itni precious ho ki kabhi kabhi tumhe khone
-          ka darr mere thoughts par haavi ho jaata hai.
-        </p>
-        <p>
-          Lekin meri jaan, main kabhi nahi chahta ki mere darr ki wajah se
-          tumhe hurt ho ya tumhe apne pyaar ko baar baar prove karna pade.
-          Tumhari feelings mere liye important hain, aur tumhara sukoon bhi.
-        </p>
-        <p>
-          Main chahta hoon ki hum ek dusre ko samjhein, ek dusre ki baat
-          sunein, aur har misunderstanding ko pyaar aur patience se solve
-          karein. Har baar perfect hona zaroori nahi, saath rehkar seekhna
-          zaroori hai. 🫂
-        </p>
-        <p>
-          Main tumhara stress nahi, tumhara sukoon banna chahta hoon.
-          Tumhari aankhon mein aansu ki wajah nahi, tumhari smile ki
-          wajah banna chahta hoon. 🥹❤️
-        </p>
-        <p>
-          I promise to keep choosing understanding, respect, honesty,
-          and love with you. Not just in words, but in the way I treat you. 🧿
-        </p>
-      </div>
-
-      <figure class="memory">
-        <img src="44.jpeg" alt="A beautiful moment of Alishaaa" loading="lazy">
-        <figcaption>With you, I want love to feel safe, gentle and real. 🤍</figcaption>
-      </figure>
-    </section>
-
-    <!-- CHAPTER 4 -->
-    <section class="section-card card">
-      <div class="letter-content">
-        <p class="eyebrow">Chapter 04 · Our little forever</p>
-        <h2>The Life I Dream Of With You ♾️</h2>
-
-        <p>
-          Aaaluuu, mujhe tumhare saath sirf romantic moments nahi,
-          balki normal life ke chhote chhote moments bhi jeene hain.
-          Subah tumhe dekhna, tumse din ki baatein karna, saath mein
-          hasna, aur raat ko tumse baat karke sona. ❤️
-        </p>
-        <p>
-          Main tumhare saath travel karna chahta hoon, naye places
-          explore karna chahta hoon, tumhari favourite cheezein yaad
-          rakhna chahta hoon, aur tumhari har chhoti achievement par
-          tumse zyada khush hona chahta hoon. ✈️🌍
-        </p>
-        <p>
-          Kabhi hum bahut hasenge, kabhi chhoti moti fights hongi,
-          kabhi life difficult hogi. Lekin main chahta hoon ki hum
-          ek dusre ke against nahi, ek dusre ke saath khade rahein.
-        </p>
-        <p>
-          Ek din apna chhota sa ghar ho, jahan pyaar ho, respect ho,
-          laughter ho, aur tumhari cute si awaaz se ghar ki har
-          khamoshi bhar jaaye. 🏡💗
-        </p>
-        <p>
-          Mujhe perfect life nahi chahiye, jaan. Mujhe tumhare saath
-          apni life beautiful banani hai. 🫶🏻
-        </p>
-      </div>
-
-      <figure class="memory">
-        <img src="55.jpeg" alt="A memory to treasure together" loading="lazy">
-        <figcaption>One day at a time, one memory at a time. ♾️</figcaption>
-      </figure>
-    </section>
-
-    <!-- CHAPTER 5 -->
-    <section class="section-card card">
-      <div class="letter-content">
-        <p class="eyebrow">Chapter 05 · Things I want you to know</p>
-        <h2>Things I May Not Say Every Day 🥹</h2>
-
-        <p>
-          Alishaaa, shayad main har baar sahi words use nahi kar pata,
-          lekin tum mere liye jitni important ho, woh main words mein
-          poori tarah explain nahi kar sakta.
-        </p>
-        <p>
-          Tumhari happiness matter karti hai. Tumhare dreams matter
-          karte hain. Tumhara mood, tumhari feelings, tumhari problems —
-          main chahta hoon ki tum mere saath sab share kar sako.
-        </p>
-        <p>
-          Tumhe har waqt strong banne ki zaroorat nahi hai, baccha.
-          Kabhi thak jao toh mere paas aana, kabhi ro dene ka mann ho
-          toh mujhse baat karna, aur kabhi duniya se break chahiye ho
-          toh mere saath bas khamoshi mein bhi reh lena. 🫂❤️
-        </p>
-        <p>
-          Main tumhari har problem solve kar paun, zaroori nahi,
-          lekin main tumhari baat sunne, tumhe samajhne, aur tumhare
-          saath khade rehne ki poori koshish karunga.
-        </p>
-        <p>
-          Tum meri Aaaluuu ho, meri jaan ho, aur meri life ki un
-          feelings mein se ho jinhe main kabhi ordinary nahi samajhna
-          chahta. 💋🧿
-        </p>
-      </div>
-
-      <div class="quote-box">
-        “Tumhe har din perfect hone ki zaroorat nahi. Mere saamne bas tum rehna.” 🩷
-      </div>
-    </section>
-
-    <!-- FINAL LOVE LETTER -->
-    <section class="section-card final-letter card">
-      <div class="letter-content">
-        <p class="eyebrow">One last thing, my love 💌</p>
-        <h2>I Love You, Meri Baykooo ❤️</h2>
-
-        <p>
-          Agar mujhe tumhare liye ek hi wish maangne ka mauka mile,
-          toh main yahi maangunga ki hum hamesha ek dusre ko samajhne,
-          respect karne, aur pyaar karne ki koshish karte rahein.
-        </p>
-        <p>
-          Main tumhare saath aur memories banana chahta hoon,
-          tumhare saath grow karna chahta hoon, tumhare saath life
-          ke har naye chapter mein enter karna chahta hoon. 🥹
-        </p>
-        <p>
-          Tum meri favourite hello ho, meri hard days ki smile ho,
-          meri random thoughts mein aane wali sabse pyaari person ho,
-          aur meri woh choice ho jise main dil se karta hoon. 🫀
-        </p>
-        <p>
-          Aaj, kal, aur har us din jab hum ek dusre ko phir se choose
-          karein — I love you so much, Aaaluuu. 💋🧿
-        </p>
-      </div>
-
-      <figure class="memory final-photo">
-        <img src="11.jpeg" alt="My beautiful Alishaaa" loading="lazy">
-        <figcaption>My girl. My favourite person. My Aaaluuu. ❤️</figcaption>
-      </figure>
-
-      <div class="final-message">
-        <div class="heart-decoration">💗 ✨ 💗</div>
-        <h2>Always Yours, Shubhu 🫶🏻♾️</h2>
-        <p>Just You, Me, and a Little Forever 💌</p>
-        <p class="signature">Yours, Shubham 💋</p>
-      </div>
-    </section>
-
-    <footer class="page-footer">
-      Made with all my love, for you, Alishaaa. ❤️
-    </footer>
-
+    <p class="bottom-note">
+      MADE WITH <span>♥</span> BY SHUBHU · FOR ALISHAAA · ALWAYS ♾️
+    </p>
   </main>
 
-  <script src="Script.js"></script>
+  <script>
+    const pages = Array.from(document.querySelectorAll(".page"));
+    const book = document.getElementById("book");
+    const prevButton = document.getElementById("prevButton");
+    const nextButton = document.getElementById("nextButton");
+    const replayButton = document.getElementById("replayButton");
+    const pageIndicator = document.getElementById("pageIndicator");
+    const progressBar = document.getElementById("progressBar");
+    const ambient = document.getElementById("ambient");
+
+    let currentPage = 0;
+    let isAnimating = false;
+    let heartInterval;
+
+    function updateNavigation() {
+      prevButton.disabled = currentPage === 0;
+      nextButton.disabled = currentPage === pages.length - 1;
+
+      pageIndicator.textContent =
+        `PAGE ${String(currentPage + 1).padStart(2, "0")} / ` +
+        String(pages.length).padStart(2, "0");
+
+      progressBar.style.width =
+        `${((currentPage + 1) / pages.length) * 100}%`;
+
+      nextButton.innerHTML =
+        currentPage === pages.length - 1
+          ? "End of Story ♡"
+          : 'Next Page <span>→</span>';
+    }
+
+    function goToPage(nextIndex, direction = "next") {
+      if (isAnimating) return;
+      if (nextIndex < 0 || nextIndex >= pages.length) return;
+      if (nextIndex === currentPage) return;
+
+      isAnimating = true;
+
+      const oldPage = pages[currentPage];
+      const newPage = pages[nextIndex];
+
+      oldPage.classList.remove("active");
+      oldPage.classList.remove("exit-next", "exit-prev");
+
+      newPage.classList.add("active");
+
+      // Re-trigger the page-entry animation.
+      newPage.style.animation = "none";
+      void newPage.offsetWidth;
+      newPage.style.animation = "";
+
+      currentPage = nextIndex;
+      updateNavigation();
+
+      book.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      window.setTimeout(() => {
+        isAnimating = false;
+      }, 560);
+    }
+
+    prevButton.addEventListener("click", () => {
+      goToPage(currentPage - 1, "prev");
+    });
+
+    nextButton.addEventListener("click", () => {
+      goToPage(currentPage + 1, "next");
+    });
+
+    replayButton.addEventListener("click", () => {
+      goToPage(0, "prev");
+    });
+
+    // Keyboard navigation on desktop.
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowRight") {
+        goToPage(currentPage + 1, "next");
+      } else if (event.key === "ArrowLeft") {
+        goToPage(currentPage - 1, "prev");
+      }
+    });
+
+    // Swipe left/right to turn pages on mobile.
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    book.addEventListener("touchstart", event => {
+      const touch = event.changedTouches[0];
+      touchStartX = touch.screenX;
+      touchStartY = touch.screenY;
+    }, { passive: true });
+
+    book.addEventListener("touchend", event => {
+      const touch = event.changedTouches[0];
+      const dx = touch.screenX - touchStartX;
+      const dy = touch.screenY - touchStartY;
+
+      if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+        if (dx < 0) {
+          goToPage(currentPage + 1, "next");
+        } else {
+          goToPage(currentPage - 1, "prev");
+        }
+      }
+    }, { passive: true });
+
+    // Decorative floating hearts.
+    function addFloatingHeart() {
+      const heart = document.createElement("span");
+      heart.className = "ambient-heart";
+      heart.textContent = ["♡", "💗", "💕", "✦"][
+        Math.floor(Math.random() * 4)
+      ];
+
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.fontSize = `${12 + Math.random() * 14}px`;
+      heart.style.setProperty(
+        "--duration",
+        `${7 + Math.random() * 6}s`
+      );
+
+      ambient.appendChild(heart);
+      window.setTimeout(() => heart.remove(), 14000);
+    }
+
+    updateNavigation();
+
+    for (let i = 0; i < 9; i++) {
+      window.setTimeout(addFloatingHeart, i * 250);
+    }
+
+    heartInterval = window.setInterval(addFloatingHeart, 1100);
+  </script>
 </body>
 </html>
