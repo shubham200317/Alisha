@@ -2,307 +2,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Alishaaa ❤️</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f9dce8">
+  <title>For My Alishaaa ❤️</title>
 
-    <link rel="stylesheet" href="Style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+    }
 
-        body {
-            min-height: 100vh;
-            font-family: "Segoe UI", sans-serif;
-            background: linear-gradient(
-                135deg,
-                #ffe0ec,
-                #ffc1d6,
-                #fff0f5,
-                #ffb6d0
-            );
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            color: #7b1745;
-        }
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      padding: 28px 16px;
+      background:
+        radial-gradient(ellipse at top, #fff4f8 0%, transparent 55%),
+        linear-gradient(135deg, #fce7ef, #f4c6d9, #fbeaf1);
+      color: #78344f;
+      font-family: Georgia, "Times New Roman", serif;
+    }
 
-        .welcome-screen {
-            width: 90%;
-            max-width: 750px;
-            text-align: center;
-            padding: 35px 22px;
-            animation: appear 1.5s ease;
-            position: relative;
-            z-index: 2;
-        }
+    .scene {
+      width: min(88vw, 360px);
+      perspective: 1400px;
+    }
 
-        .heart {
-            font-size: clamp(75px, 15vw, 120px);
-            display: inline-block;
-            animation: heartbeat 1.3s infinite;
-            filter: drop-shadow(0 8px 20px #f06292);
-            margin-bottom: 22px;
-        }
+    .book {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 0.72;
+      transform-style: preserve-3d;
+      filter: drop-shadow(0 22px 24px #a34b6a35);
+    }
 
-        .small-heading {
-            font-size: 15px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #b83269;
-            margin-bottom: 16px;
-        }
+    /* Pages inside the book */
+    .pages {
+      position: absolute;
+      inset: 5px 4px 5px 12px;
+      border-radius: 5px 12px 12px 5px;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          #fffdf9 0,
+          #fffdf9 3px,
+          #eadde0 4px,
+          #fffdf9 5px
+        );
+      box-shadow: inset 8px 0 12px #8d4c6420;
+      overflow: hidden;
+    }
 
-        h1 {
-            font-size: clamp(32px, 7vw, 54px);
-            line-height: 1.2;
-            margin-bottom: 22px;
-            color: #a51d55;
-            text-shadow: 0 3px 15px #ffffff9c;
-        }
+    .pages::before {
+      content: "";
+      position: absolute;
+      inset: 13px;
+      border: 1px solid #eac2d0;
+      border-radius: 3px;
+    }
 
-        .message {
-            max-width: 600px;
-            margin: 0 auto 18px;
-            font-size: clamp(17px, 3.5vw, 21px);
-            line-height: 1.9;
-            color: #722344;
-        }
+    .inside {
+      position: absolute;
+      inset: 10%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 12px;
+      padding: 8px;
+    }
 
-        .message span {
-            display: inline-block;
-            opacity: 0;
-            animation: wordAppear 0.5s forwards;
-        }
+    .inside .small {
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #bb6685;
+    }
 
-        .dedication {
-            margin-top: 18px;
-            font-size: 19px;
-            font-style: italic;
-            color: #a51d55;
-        }
+    .inside .heart {
+      font-size: clamp(35px, 10vw, 50px);
+      animation: heartbeat 1.5s infinite;
+    }
 
-        .open-button {
-            margin-top: 32px;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 50px;
-            background: linear-gradient(135deg, #ff4f91, #d81b60);
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            box-shadow: 0 8px 25px #d81b6050;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    .inside h2 {
+      margin: 0;
+      font-size: clamp(22px, 6vw, 29px);
+      line-height: 1.25;
+      color: #a42e5e;
+    }
 
-        .open-button:hover {
-            transform: translateY(-4px) scale(1.04);
-            box-shadow: 0 12px 30px #d81b6070;
-        }
+    .inside p {
+      margin: 0;
+      font-size: clamp(13px, 3.5vw, 16px);
+      line-height: 1.7;
+    }
 
-        .floating-heart {
-            position: absolute;
-            bottom: -50px;
-            font-size: 22px;
-            opacity: 0.65;
-            pointer-events: none;
-            animation: floatUp linear infinite;
-        }
+    .inside .signature {
+      margin-top: 8px;
+      font-style: italic;
+      color: #b44c77;
+    }
 
-        .floating-heart:nth-of-type(1) {
-            left: 8%;
-            animation-duration: 8s;
-        }
+    /* Front cover */
+    .cover {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      transition: transform 1.6s cubic-bezier(.65, 0, .25, 1);
+    }
 
-        .floating-heart:nth-of-type(2) {
-            left: 25%;
-            animation-duration: 11s;
-            animation-delay: 2s;
-        }
+    .cover-front,
+    .cover-back {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: 5px 14px 14px 5px;
+      backface-visibility: hidden;
+    }
 
-        .floating-heart:nth-of-type(3) {
-            left: 48%;
-            animation-duration: 9s;
-            animation-delay: 1s;
-        }
+    .cover-front {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 25px 19px;
+      color: #fff8fb;
+      border: 2px solid #f7b7d0;
+      background:
+        radial-gradient(circle at 50% 35%, #e98bb0 0, transparent 35%),
+        linear-gradient(145deg, #a92c5b, #d95786 48%, #8f204c);
+      box-shadow:
+        inset 7px 0 9px #67173965,
+        inset -3px 0 5px #ffffff20;
+    }
 
-        .floating-heart:nth-of-type(4) {
-            left: 70%;
-            animation-duration: 12s;
-            animation-delay: 3s;
-        }
+    .cover-front::before {
+      content: "";
+      position: absolute;
+      inset: 13px;
+      border: 1px solid #ffd6e5a8;
+      border-radius: 3px;
+      pointer-events: none;
+    }
 
-        .floating-heart:nth-of-type(5) {
-            left: 88%;
-            animation-duration: 10s;
-            animation-delay: 1.5s;
-        }
+    .cover-front::after {
+      content: "✦  ·  ♡  ·  ✦";
+      position: absolute;
+      bottom: 22px;
+      font-size: 13px;
+      letter-spacing: 5px;
+      color: #ffdfeb;
+    }
 
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            15% {
-                transform: scale(1.13);
-            }
-            30% {
-                transform: scale(1);
-            }
-            45% {
-                transform: scale(1.09);
-            }
-        }
+    .eyebrow {
+      margin: 0 0 24px;
+      font: 10px/1.8 Arial, sans-serif;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #ffe0eb;
+    }
 
-        @keyframes appear {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .cover-heart {
+      margin-bottom: 18px;
+      font-size: 54px;
+      filter: drop-shadow(0 6px 9px #63133570);
+      animation: heartbeat 1.5s infinite;
+    }
 
-        @keyframes wordAppear {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .cover-front h1 {
+      margin: 0;
+      font-size: clamp(27px, 7.5vw, 37px);
+      line-height: 1.2;
+      font-weight: normal;
+      text-shadow: 0 3px 8px #6d173850;
+    }
 
-        @keyframes floatUp {
-            from {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            15% {
-                opacity: 0.65;
-            }
-            to {
-                transform: translateY(-115vh) rotate(25deg);
-                opacity: 0;
-            }
-        }
+    .cover-subtitle {
+      margin: 15px 0 23px;
+      font-size: 15px;
+      font-style: italic;
+      line-height: 1.7;
+      color: #ffe9f0;
+    }
 
-        @media (max-width: 480px) {
-            .welcome-screen {
-                padding: 25px 14px;
-            }
+    .open-button {
+      position: relative;
+      z-index: 2;
+      max-width: 100%;
+      padding: 12px 19px;
+      border: 1px solid #fff0f6;
+      border-radius: 30px;
+      background: #fff4f8;
+      color: #a32d5b;
+      font: 600 13px Arial, sans-serif;
+      cursor: pointer;
+      box-shadow: 0 5px 14px #60132d30;
+      transition: transform .2s, background .2s;
+    }
 
-            .small-heading {
-                font-size: 12px;
-                letter-spacing: 3px;
-            }
+    .open-button:hover {
+      transform: translateY(-2px);
+      background: white;
+    }
 
-            .open-button {
-                padding: 14px 25px;
-                font-size: 16px;
-            }
-        }
+    .cover-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(145deg, #9e2854, #cf5983);
+      border: 2px solid #f7b7d0;
+    }
 
-        
-html {
-  min-height: 100%;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-}
+    .cover-back::after {
+      content: "♡";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 65px;
+      color: #ffcfdf;
+      opacity: .75;
+    }
 
-body {
-  min-height: 100vh;
-  min-height: 100svh;
-  height: auto !important;
-  overflow-x: hidden;
-  overflow-y: auto !important;
-}
+    /* Open-book animation */
+    .book.open .cover {
+      transform: rotateY(-155deg);
+    }
 
-button {
-  flex-shrink: 0;
-  max-width: 100%;
-}
+    .book.open .cover-front {
+      pointer-events: none;
+    }
 
-@media (max-width: 600px) {
-  body {
-    padding-bottom: 30px;
-  }
-}
+    .book.open .inside {
+      animation: reveal 1s .6s both;
+    }
 
+    .hint {
+      margin: 27px 0 0;
+      text-align: center;
+      color: #914866;
+      font: 12px/1.6 Arial, sans-serif;
+      letter-spacing: .5px;
+    }
 
-        
+    .hint span {
+      display: inline-block;
+      margin: 0 4px;
+      animation: float 1.5s infinite ease-in-out;
+    }
 
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                scroll-behavior: auto !important;
-            }
-        }
-    </style>
+    .footer {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 12px;
+      font-style: italic;
+      color: #a24c70;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.1); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.08); }
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @media (max-width: 420px) {
+      .scene {
+        width: min(86vw, 320px);
+      }
+
+      .hint {
+        margin-top: 22px;
+      }
+    }
+
+    @media (max-height: 650px) {
+      body {
+        align-items: flex-start;
+      }
+
+      .scene {
+        width: min(68vw, 280px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <main>
+    <div class="scene">
+      <div class="book" id="loveBook">
 
-    <div class="floating-heart">💗</div>
-    <div class="floating-heart">💕</div>
-    <div class="floating-heart">💖</div>
-    <div class="floating-heart">💘</div>
-    <div class="floating-heart">💞</div>
+        <div class="pages">
+          <div class="inside">
+            <div class="small">A little world of ours</div>
+            <div class="heart">💗</div>
+            <h2>Hiii, Meri Alishaaa!</h2>
+            <p>
+              Har page mein thoda sa pyaar,
+              har word mein tumhara naam,
+              aur har dream mein hum dono. 🥹
+            </p>
+            <p class="signature">Forever yours, Shubhu ♾️</p>
+          </div>
+        </div>
 
-    <main class="welcome-screen">
+        <div class="cover" id="bookCover">
+          <div class="cover-front">
+            <p class="eyebrow">A little surprise for my favourite person</p>
 
-        <div class="small-heading">A little surprise for my favourite person</div>
+            <div class="cover-heart">❤️</div>
 
-        <div class="heart">❤️</div>
+            <h1>For My<br>Alishaaa</h1>
 
-        <h1>Hey, My Gorgeous Alishaaa! 🥹💗</h1>
+            <p class="cover-subtitle">
+              Just you, me,<br>
+              and a little forever ♾️
+            </p>
 
-        <p class="message" id="loveMessage">
-            I have so much to say, meri Aaaluuu,
-            but sometimes words are too small to explain
-            how much you mean to me.
-        </p>
+            <button class="open-button" id="openBook">
+              Open Our Story 💌
+            </button>
+          </div>
 
-        <p class="message">
-            Tu sirf meri favourite person nahi hai, baccha...
-            tu meri smile, mera sukoon, meri khushi
-            aur mere dil ka sabse pyaara hissa hai. 🫶🏻
-        </p>
+          <div class="cover-back"></div>
+        </div>
 
-        <p class="dedication">
-            Made with all my love, just for you, meri baykooo. ♾️❤️
-        </p>
+      </div>
 
-        <button class="open-button" onclick="openLoveBook()">
-            Open Your Love Book 💌
-        </button>
+      <p class="hint">
+        <span>✨</span> Made with all my love, just for you
+        <span>✨</span>
+      </p>
 
-    </main>
+      <p class="footer">From your Shubhu, with all his heart ❤️</p>
+    </div>
+  </main>
 
-    <script>
-        // Reveal the opening message word by word
-        const message = document.getElementById("loveMessage");
-        const words = message.textContent.trim().split(/\s+/);
+  <script>
+    const book = document.getElementById("loveBook");
+    const openButton = document.getElementById("openBook");
+    let isOpening = false;
 
-        message.innerHTML = words.map((word, index) => {
-            return `<span style="animation-delay:${0.7 + index * 0.12}s">${word}&nbsp;</span>`;
-        }).join("");
+    function openStory() {
+      if (isOpening) return;
+      isOpening = true;
 
-        // Open the next page
-        function openLoveBook() {
-            window.location.href = "book.html";
-        }
-    </script>
+      book.classList.add("open");
+      openButton.textContent = "Opening our love story… 💗";
+      openButton.disabled = true;
 
+      // Open the existing love-letter book after the cover animation.
+      window.setTimeout(() => {
+        window.location.href = "book.html";
+      }, 1900);
+    }
+
+    openButton.addEventListener("click", openStory);
+  </script>
 </body>
 </html>
