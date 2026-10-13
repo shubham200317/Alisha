@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Alishaaa ❤️</title>
+
+    <link rel="stylesheet" href="Style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(
+                135deg,
+                #ffe0ec,
+                #ffc1d6,
+                #fff0f5,
+                #ffb6d0
+            );
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #7b1745;
+        }
+
+        .welcome-screen {
+            width: 90%;
+            max-width: 750px;
+            text-align: center;
+            padding: 35px 22px;
+            animation: appear 1.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .heart {
+            font-size: clamp(75px, 15vw, 120px);
+            display: inline-block;
+            animation: heartbeat 1.3s infinite;
+            filter: drop-shadow(0 8px 20px #f06292);
+            margin-bottom: 22px;
+        }
+
+        .small-heading {
+            font-size: 15px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #b83269;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: clamp(32px, 7vw, 54px);
+            line-height: 1.2;
+            margin-bottom: 22px;
+            color: #a51d55;
+            text-shadow: 0 3px 15px #ffffff9c;
+        }
+
+        .message {
+            max-width: 600px;
+            margin: 0 auto 18px;
+            font-size: clamp(17px, 3.5vw, 21px);
+            line-height: 1.9;
+            color: #722344;
+        }
+
+        .message span {
+            display: inline-block;
+            opacity: 0;
+            animation: wordAppear 0.5s forwards;
+        }
+
+        .dedication {
+            margin-top: 18px;
+            font-size: 19px;
+            font-style: italic;
+            color: #a51d55;
+        }
+
+        .open-button {
+            margin-top: 32px;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff4f91, #d81b60);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px #d81b6050;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .open-button:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 12px 30px #d81b6070;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 22px;
+            opacity: 0.65;
+            pointer-events: none;
+            animation: floatUp linear infinite;
+        }
+
+        .floating-heart:nth-of-type(1) {
+            left: 8%;
+            animation-duration: 8s;
+        }
+
+        .floating-heart:nth-of-type(2) {
+            left: 25%;
+            animation-duration: 11s;
+            animation-delay: 2s;
+        }
+
+        .floating-heart:nth-of-type(3) {
+            left: 48%;
+            animation-duration: 9s;
+            animation-delay: 1s;
+        }
+
+        .floating-heart:nth-of-type(4) {
+            left: 70%;
+            animation-duration: 12s;
+            animation-delay: 3s;
+        }
+
+        .floating-heart:nth-of-type(5) {
+            left: 88%;
+            animation-duration: 10s;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.13);
+            }
+            30% {
+                transform: scale(1);
+            }
+            45% {
+                transform: scale(1.09);
+            }
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes wordAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.65;
+            }
+            to {
+                transform: translateY(-115vh) rotate(25deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-screen {
+                padding: 25px 14px;
+            }
+
+            .small-heading {
+                font-size: 12px;
+                letter-spacing: 3px;
+            }
+
+            .open-button {
+                padding: 14px 25px;
+                font-size: 16px;
+            }
+        }
+
+        
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="floating-heart">💗</div>
+    <div class="floating-heart">💕</div>
+    <div class="floating-heart">💖</div>
+    <div class="floating-heart">💘</div>
+    <div class="floating-heart">💞</div>
+
+    <main class="welcome-screen">
+
+        <div class="small-heading">A little surprise for my favourite person</div>
+
+        <div class="heart">❤️</div>
+
+        <h1>Hey, My Gorgeous Alishaaa! 🥹💗</h1>
+
+        <p class="message" id="loveMessage">
+            I have so much to say, meri Aaaluuu,
+            but sometimes words are too small to explain
+            how much you mean to me.
+        </p>
+
+        <p class="message">
+            Tu sirf meri favourite person nahi hai, baccha...
+            tu meri smile, mera sukoon, meri khushi
+            aur mere dil ka sabse pyaara hissa hai. 🫶🏻
+        </p>
+
+        <p class="dedication">
+            Made with all my love, just for you, meri baykooo. ♾️❤️
+        </p>
+
+        <button class="open-button" onclick="openLoveBook()">
+            Open Your Love Book 💌
+        </button>
+
+    </main>
+
+    <script>
+        // Reveal the opening message word by word
+        const message = document.getElementById("loveMessage");
+        const words = message.textContent.trim().split(/\s+/);
+
+        message.innerHTML = words.map((word, index) => {
+            return `<span style="animation-delay:${0.7 + index * 0.12}s">${word}&nbsp;</span>`;
+        }).join("");
+
+        // Open the next page
+        function openLoveBook() {
+            window.location.href = "book.html";
+        }
+    </script>
+
+</body>
+</html>
